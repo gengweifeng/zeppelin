@@ -16,6 +16,7 @@ RUN apt-get update -y && apt-get install -y git \
 ENV MAVEN_OPTS "-Xmx2g -XX:MaxPermSize=1024m"
 
 RUN git clone https://github.com/apache/zeppelin.git \
+    && cd zeppelin \
     && ./dev/change_scala_version.sh 2.11 \
     && mvn clean package -DskipTests -Pspark-2.0 -Phadoop-2.4 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
     
