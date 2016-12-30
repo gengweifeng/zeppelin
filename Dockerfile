@@ -5,6 +5,7 @@ MAINTAINER zepplin Docker Maintainers "1516827586@qq.com"
 ENV TZ Asia/Shanghai
 
 RUN apt-get update -y && apt-get install -y git \
+    && apt-get install -y wget \
     && apt-get install -y openjdk-7-jdk \
     && apt-get install -y npm \
     && apt-get install -y libfontconfig \
