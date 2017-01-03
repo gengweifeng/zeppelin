@@ -6,7 +6,12 @@ ENV TZ Asia/Shanghai
 
 RUN apt-get update -y && apt-get install -y git \
     && apt-get install -y wget \
+    && apt-get install -y curl \
+    && apt-get install -y build-essential \
+    && apt-get install -y openssl \
+    && apt-get install -y libssl-dev \
     && apt-get install -y openjdk-7-jdk \
+    && apt-get install -y nodejs \
     && apt-get install -y npm \
     && apt-get install -y libfontconfig \
     && wget http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz \
@@ -18,6 +23,7 @@ ENV MAVEN_OPTS "-Xmx2g -XX:MaxPermSize=1024m"
 RUN git clone https://github.com/apache/zeppelin.git \
     && cd zeppelin \
     && ./dev/change_scala_version.sh 2.11 \
+    && mvn clean \
     && mvn clean package -DskipTests -Pspark-2.0 -Phadoop-2.4 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
     
 ENTRYPOINT ["./bin/zeppelin-daemon.sh"]
